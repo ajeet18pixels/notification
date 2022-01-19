@@ -1,0 +1,622 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+        <meta charset="utf-8" />
+        <title>18Pixels | Management Tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+
+        <!-- App css -->
+        <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" id="light-style" />
+        <link href="{% static 'assets/css/app-dark.min.css' %}" rel="stylesheet" type="text/css" id="dark-style" />
+        <link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+        <!-- Begin page -->
+        <div class="wrapper">
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="leftside-menu" id="sidebarMenus">
+                {% include 'base.html' %}
+              </div>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+                    <!-- Topbar Start -->
+                    <div class="navbar-custom" id="load-navigation">{% include 'hearder.html' %} </div>
+                    <!-- end Topbar -->
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card widget-inline mt-2">
+                                    <div class="card-body p-0">
+                                        <div class="row g-0">
+                                            <div class="col-sm-6 col-xl-2">
+                                                <div class="card  m-0">
+                                                    <div class="card-body text-center">
+                                                       <a href="/project-management/project-list"> <i class="dripicons-briefcase text-muted" style="font-size: 24px;"></i>
+                                                        <h3><span>{{total_project_count|length}}</span></h3>
+                                                        <p class="text-muted font-15 mb-0">Total Projects</p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-sm-6 col-xl-2">
+                                                <div class="card m-0 border-start">
+                                                    <div class="card-body text-center">
+                                                       <a href="/employee-management/employee-list"> <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                                        <h3><span>{{total_emp|length}}</span></h3>
+                                                        <p class="text-muted font-15 mb-0">Total Employes</p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="col-sm-6 col-xl-2">
+                                                <div class="card   m-0 border-start">
+                                                    <div class="card-body text-center">
+                                                      <a href="/log-management/online-users">  <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                                        <h3><span>{{total_online_emp|length|add:"-1"}}</span></h3>
+                                                        <p class="text-muted font-15 mb-0">  Employes Online</p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-sm-6 col-xl-2">
+                                                <div class="card   m-0 border-start">
+                                                    <div class="card-body text-center">
+                                                       <a href="/event-management/event-list"> <i class="dripicons-star text-muted" style="font-size: 24px;"></i>
+                                                        <h3><span>{{total_upcoming_event|length}}</span></h3>
+                                                        <p class="text-muted font-15 mb-0">Upcoming Events</p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-sm-6 col-xl-2">
+                                                <div class="card   m-0 border-start">
+                                                    <div class="card-body text-center">
+                                                       <a href="{% url 'get_leave_requests' %}"> <i class="dripicons-user text-muted" style="font-size: 24px;"></i>
+                                                        <h3>{{total_pending_leave_request|length}} </h3>
+                                                        <p class="text-muted font-15 mb-0"> Leave Requests </p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="col-sm-6 col-xl-2">
+                                                <div class="card   m-0 border-start">
+                                                    <div class="card-body text-center">
+                                                       <a href="/hr-management/received-application_-list"> <i class="dripicons-user text-muted" style="font-size: 24px;"></i>
+                                                        <h3>{{total_job_applications|length}} </h3>
+                                                        <p class="text-muted font-15 mb-0"> Job Applications </p> </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                        </div> <!-- end row -->
+                                    </div>
+                                </div> <!-- end card-box-->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="/project-management/project-list" >
+                                                View all projects
+                                            </a>
+                                        </div>
+                                        <h4 class="header-title mb-3">Projects Status</h4>
+                                        <div data-simplebar style="max-height: 450px;">
+                                           <div class="table-responsive ">
+                                            <table class="table table-centered table-nowrap table-hover mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <th width="150">Project</th>
+                                                        <th>Status</th>
+                                                        <th>Progress</th>
+                                                        <th>Due/end date</th>
+                                                    </tr>
+                                                    {% for i in total_project %}
+                                                    <tr>
+                                                        <td> <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">{{i.project_name}}</a></h5></td>
+                                                        <td>
+                                                            {% if i.project_status_force_update == 'Completed' %}
+                                                                <span class="badge badge-success-lighten">Completed {% if i.project_to_maintenance == True %}&nbsp;&nbsp;<i class="fas fa-wrench"></i>{% endif %}</span>
+                                                            {% else %}
+                                                                {% if i.project_status == 'Just Created' %}
+                                                                <span class="badge badge-warning-lighten">{{i.project_status}}</span>
+                                                                {% elif i.project_status == 'Ongoing' %}
+                                                                <span class="badge badge-primary-lighten">{{i.project_status}}</span>
+                                                                {% elif i.project_status == 'Completed' %}
+                                                                <span class="badge badge-success-lighten">{{i.project_status}}</span>
+                                                                {% elif i.project_status == 'Delayed' %}
+                                                                <span class="badge badge-danger-lighten">{{i.project_status}}</span>
+                                                                {% else %}
+                                                                <span class="badge badge-success-lighten">{{i.project_status}}</span>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                            {% comment %} <span class="badge badge-warning-lighten">In-progress</span> {% endcomment %}
+                                                        </td>
+                                                        <td>    
+                                                            {% if i.project_status_force_update == 'Completed' %}
+                                                                <span class=" font-12">100%</span>  
+                                                                <div class="progress progress-sm">
+                                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                                    </div>
+                                                                </div>
+                                                            {% else %}
+                                                            <span class=" font-12">{{i.project_progress}}%</span>  
+                                                            <div class="progress progress-sm">
+                                                                {% if i.project_progress <= 25 %}
+                                                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{i.project_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{i.project_progress}}%;">
+                                                                {% elif i.project_progress <= 50 %}
+                                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{i.project_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{i.project_progress}}%;">
+                                                                {% elif i.project_progress <= 75 %}
+                                                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{i.project_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{i.project_progress}}%;">
+                                                                {% elif i.project_progress <= 100 %}
+                                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{i.project_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{i.project_progress}}%;">
+                                                                {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td> 
+                                                            <h5 class="font-14 mt-1 fw-normal">{% if i.project_due_date == None %}-{% else %}{{i.project_due_date}}{% endif %}</h5>
+                                                        </td>   
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% comment %} <tr>
+                                                        <td> <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">rozana</a></h5></td>
+                                                        <td>
+                                                            <span class="badge badge-danger-lighten">Delayed</span>
+                                                        </td>
+                                                       <td>
+                                                              <span class=" font-12">95%</span>  
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="60" style="width: 95%;">
+                                                                </div><!-- /.progress-bar -->
+                                                              </div>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="font-14 mt-1 fw-normal">Dec 20, 2021  </h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td> <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">RDX</a></h5></td>
+                                                        
+                                                        <td>
+                                                            
+                                                            <span class="badge badge-success-lighten">Completed</span>
+                                                        </td>
+                                                    <td>
+                                                              <span class=" font-12">60%</span>  
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="60" style="width: 60%;">
+                                                                </div><!-- /.progress-bar -->
+                                                              </div>
+                                                        </td>
+                                                        <td>
+                                                             
+                                                            <h5 class="font-14 mt-1 fw-normal">Dec 10, 2021  </h5>
+                                                        </td>
+                                                         
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">Ambualnce</a></h5></td>
+                                                        
+                                                         
+                                                        <td>
+                                                            
+                                                            <span class="badge badge-warning-lighten">In-progress</span>
+                                                        </td>
+                                                        <td>
+                                                              <span class=" font-12">70%</span>  
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="60" style="width: 70%;">
+                                                                </div><!-- /.progress-bar -->
+                                                              </div>
+                                                        </td>
+                                                        <td>
+                                                             
+                                                            <h5 class="font-14 mt-1 fw-normal">Dec 30, 2021  </h5>
+                                                        </td>
+                                                         
+                                                    </tr> {% endcomment %}
+                                                    
+                                                </tbody>
+                                            </table>
+                                           </div> <!-- end table-responsive-->
+                                        </div>
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="/task-management/task-list" class=""  >
+                                                View all tasks
+                                            </a>
+                                            
+                                        </div>
+                                        <h4 class="header-title mb-3">Recent Tasks</h4>
+
+                                        <p>  <span class="badge font-14 bg-warning mr-2"> Doing: <b>{{doing}}</b></span>
+                                            <span class="badge font-14 bg-info mr-2"> To-do: <b>{{todo}}</b></span>
+                                          <span class="badge font-14 bg-danger mr-2">Delayed: <b>{{delay}}</b></span>
+                                           
+                                            <span class="badge font-14 bg-success mr-2"> Completed: <b>{{done}}</b></span>
+
+                                        </p>
+                                        <div data-simplebar style="max-height: 350px;">
+                                           <div class="table-responsive ">
+                                            <table class="table table-centered table-nowrap table-hover mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <th width="150">Task</th>
+                                                        
+                                                        <th>Status</th>
+                                                        <th>Assigned to</th>
+                                                        
+                                                    </tr>
+
+                                                    {% for i in TaskObj %}
+                                                    <tr>
+                                                        <td>
+                                                            <p class="font-14 my-1  "> {{i.task_title}} <span class="font-12 d-block text-info">{{i.projectFK.project_name}}</span></p>
+                                                        </td>
+                                                        <td>
+                                                            {% if i.task_status == 'To do' and i.status == 'delay' %}
+                                                                <span class="badge badge-danger-lighten">{{i.status}}</span>
+                                                            {% elif i.task_status == 'To do' %}
+                                                                <span class="badge badge-primary-lighten">{{i.task_status}}</span>
+                                                            {% elif i.task_status == 'Doing' %}
+                                                                <span class="badge badge-info-lighten">{{i.task_status}}</span>
+                                                            {% elif i.task_status == 'Review' %}
+                                                                <span class="badge badge-warning-lighten">{{i.task_status}}</span>
+                                                            {% elif i.task_status == 'Done' %}
+                                                                <span class="badge badge-success-lighten">{{i.task_status}}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-danger-lighten">{{i.status}}</span>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td> 
+                                                             {{i.employeeFK.employee_name}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    {% endfor %}
+                                                    {% comment %} <tr>
+                                                        
+                                                        <td>
+                                                            <p class="font-14 my-1  "> Login/signup page developemnt <span class="font-12 d-block text-info">Ada Chikan</span></p>
+                                                           
+                                                        </td>
+                                                        <td>
+                                                          
+                                                            <span class="badge badge-warning-lighten">In-progress</span>
+                                                        </td>
+                                                        <td>
+                                                             
+                                                             Kapil
+                                                        </td>
+                                                         
+                                                         
+                                                         
+                                                    </tr>
+                                                    <tr>
+                                                        
+                                                        <td>
+                                                            <p class="font-14 my-1"> dashboard design <span class="font-12 d-block text-info">Ambulance</span></p>
+                                                           
+                                                        </td>
+                                                        <td>
+                                                           
+                                                            <span class="badge badge-info-lighten">to-do</span>
+                                                        </td>
+                                                        <td>
+                                                             Anuj    
+                                                             
+                                                        </td>
+                                                         
+                                                        
+                                                    </tr>
+                                                      <tr>
+                                                        
+                                                        <td>
+                                                            <p class="font-14 my-1"> dashboard development <span class="font-12 d-block text-info">Ambulance</span></p>
+                                                           
+                                                        </td>
+                                                        <td>
+                                                           
+                                                            <span class="badge badge-danger-lighten">delayed</span>
+                                                        </td>
+                                                        <td>
+                                                             Pooja    
+                                                             
+                                                        </td>
+                                                         
+                                                        
+                                                    </tr>
+                                                      {% endcomment %}
+                                                    
+                                                </tbody>
+                                            </table>
+                                           </div> <!-- end table-responsive-->
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+                        <!-- end row-->
+
+
+                      <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end" style="width: 200px; margin-top: -10px">
+                                             <select class="form-control select2" data-toggle="select2"    data-placeholder="Select Employee" >
+                                                {% comment %} <option></option> {% endcomment %}
+                                                {% for i in total_emp %}
+                                                    <option value="{{i.id}}">{{i.first_name}}</option>
+                                                {% endfor %}
+                                          </select>
+                                        </div>
+                                        <h4 class="header-title mb-4">Monthly Performance</h4>
+
+                                        <div dir="ltr">
+                                             <div class="mt-3 chartjs-chart" style="height: 320px;">
+                                                <canvas id="task-area-chart" data-bgColor="#727cf5" data-borderColor="#727cf5"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                              <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="/hr-management/received-application_-list" class=""  >
+                                                View all 
+                                            </a>
+                                            
+                                        </div>
+                                        <h4 class="header-title mb-3">Job Applications</h4>
+                                        <div data-simplebar style="max-height: 450px;">
+                                           <div class="table-responsive ">
+                                            <table class="table table-centered table-nowrap table-hover mb-0 smallfont">
+                                                <tbody>
+                                                    <tr>
+                                                        <th width="150">Job Title</th>
+                                                        <th>Candidate Name</th>
+                                                        <th>Mobile</th>
+                                                        <th>Resume</th>
+                                                        
+                                                    </tr>
+                                                    
+                                                    {% if total_job_applications %}
+                                                    {% for i in total_job_applications %}
+                                                    <tr>
+                                                        <td> <h5 class="font-12 my-1"><a href="javascript:void(0);" class="text-body">{{i.job_FK.position}}</a></h5></td>
+                                                        <td>
+                                                            {{i.candidate_name}}
+                                                        </td>
+                                                        <td>    
+                                                            {{i.contact}}
+                                                        </td>
+                                                        <td><a href="/media/{{i.resume_doc}}" target="_blank">Resume</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            No Record Found!
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                           </div> <!-- end table-responsive-->
+                                        </div>
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div>
+                        </div>
+                      
+                        <!-- end row-->
+
+                         <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="/event-management/event-list" class=""  >
+                                                View all 
+                                            </a>
+                                            
+                                        </div>
+                                        <h4 class="header-title mb-3">Upcoming Events</h4>
+                                        <div data-simplebar style="max-height: 450px;">
+                                           <div class="table-responsive ">
+                                            <table class="table table-centered table-nowrap table-hover mb-0 smallfont">
+                                                <tbody>
+                                                    <tr>
+                                                        <th width="150">Event Name</th>
+                                                        <th>Date</th>
+                                                        <th>Employee</th>
+                                                        
+                                                    </tr>
+                                                    {% for i in total_upcoming_event %}
+                                                    <tr>
+                                                        <td> <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">{{i.event_type}}
+                                                            {% if i.employeeFK == None %}
+                                                                ({{i.cultural_eventFK.event_name}})
+                                                            {% endif %}
+                                                        </a></h5></td>
+                                                        <td>
+                                                            {{i.event_date|date:"d M"}}
+                                                        </td>
+                                                        <td>    
+                                                            {% if i.employeeFK == None %}
+                                                                -
+                                                            {% else %}
+                                                                {{i.employeeFK.employee_name}}
+                                                            {% endif %}
+                                                        </td>  
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                           </div> <!-- end table-responsive-->
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="{% url 'get_leave_requests' %}" class=""  >
+                                                View all 
+                                            </a>
+                                        </div>
+                                        <h4 class="header-title mb-3">On Leave</h4>
+
+                                         
+                                        <div data-simplebar style="max-height: 350px;">
+                                           <div class="table-responsive ">
+                                              <table id="basic-datatable" class="table leave_req dt-responsive nowrap w-100 smallfont">
+                                            <thead>
+                                                <tr>
+                                                     
+                                                    <th width="250">Employee</th>
+                                                    <th>Leave date</th>
+                                                    
+                                                    <th>Reason</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if total_pending_leave_request %}
+                                                {% for i in total_pending_leave_request %}
+                                                <tr>
+                                                        <td class="e_name">
+                                                            <img src="/media/{{i.employeeFK.profile_image}}" alt="image" class="avatar-xs rounded-circle me-1">
+                                                            {{i.employeeFK.employee_name}}
+                                                        </td>
+                                                        <td>
+                                                            {% now "Y-m-d" as todays_date %}
+                                                            {% if todays_date == i.leave_date_from|date:"Y-m-d" %}
+                                                            <span class="badge font-12 bg-success mr-2">
+                                                                Today
+                                                            </span>
+                                                            {% else %}
+                                                            <span class="badge font-12 bg-info mr-2">
+                                                                {{i.leave_date_from}}
+                                                                {% if i.leave_date_to != None %}
+                                                                - {{i.leave_date_to}}
+                                                            </span>
+                                                            {% endif %}
+                                                            {% endif %}
+                                                    </td>
+                                                        <td>{{i.leave_reason}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                <tr>
+                                                    <td class="e_name">
+                                                    </td>
+                                                    <td>No record Found!</td>
+                                                    <td></td>
+                                                </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                           </div> <!-- end table-responsive-->
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+                        <!-- end row-->
+                         
+                        <!-- end row-->
+
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <script>document.write(new Date().getFullYear())</script> © 18pixels
+                            </div>
+                             
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+
+       
+        <!-- /End-bar -->
+
+        <!-- bundle -->
+
+        <script src="{% static 'assets/js/vendor.min.js' %}"></script>
+        <script src="{% static 'assets/js/app.min.js' %}"></script>
+
+        <!-- third party js -->
+        <script src="{% static 'assets/js/vendor/Chart.bundle.min.js' %}"></script>
+        <!-- third party js ends -->
+
+        <!-- demo app -->
+        <script src="{% static 'assets/js/pages/demo.dashboard-projects.js' %}"></script>
+        <!-- end demo js-->
+
+
+        <script src="{% static 'assets/js/custom.js' %}"></script>
+        
+    </body>
+ 
+</html>

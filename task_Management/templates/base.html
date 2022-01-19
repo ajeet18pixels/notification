@@ -1,0 +1,290 @@
+{% load static %}
+<a href="/dashboard" class="logo text-center logo-light"> <span class="logo-lg"> <img
+            src="../../static/assets/images/logo.png" alt="" height="50"> </span> <span class="logo-sm"> <img
+            src="../../static/assets/images/logo_sm.png" alt="" height="25"> </span> </a>
+<div class="h-100" id="leftside-menu-container" data-simplebar>
+    <ul class="side-nav">
+        <li class="side-nav-title side-nav-item">Navigation</li>
+        <li class="side-nav-item"> <a  href="/dashboard" 
+                 class="side-nav-link"> <i class="uil-home-alt"></i> <span> Dashboards
+                </span> </a> </li>
+        {% if request.session.userType == 'masteR' %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false"
+                aria-controls="sidebarEcommerce" class="side-nav-link"> <i class="uil-store"></i> <span> Employee
+                    Management </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarEcommerce">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/employee-management/employee-list">Employee List</a>
+                    </li>
+                    <li>
+                        <a href="/employee-management/add-employee">Add New Employee</a>
+                    </li>
+                    <li>
+                        <a href="/log-management/logs">Login/Logout Logs</a>
+                    </li>
+                    <li>
+                        <a href="/log-management/online-users">Online Users</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        {% endif %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarProject" aria-expanded="false"
+                aria-controls="sidebarEmail" class="side-nav-link"> <i class="uil-envelope"></i> <span> Project
+                    Management </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarProject">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/project-management/project-list">Project List</a>
+                    </li>
+                    {% if request.session.userType == 'masteR' %}
+                    <li>
+                        <a href="/project-management/add-project">Add New Project</a>
+                    </li>
+                    {% endif %}
+                    {% if request.session.userType == 'masteR' or request.session.userType == 'teacheR' %}
+                    <li>
+                        <a href="/project-management/add-module">Add project Modules</a>
+                    </li>
+                    <li>
+                        <a href="/project-management/module-list"> Project Modules List</a>
+                    </li>
+                    <li>
+                        <a href="/project-management/add-submodule"> Add Sub-modules</a>
+                    </li>
+                    <li>
+                        <a href="/project-management/submodule-list"> Project Sub Modules List</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </li>
+
+        <li class="side-nav-item">
+            <a href="/task-management/task-list" class="side-nav-link"> <i class="uil-folder-plus"></i> <span> Task Management </span> </a>
+        </li>
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarEmail" aria-expanded="false"
+                aria-controls="sidebarEmail" class="side-nav-link"> <i class="uil-envelope"></i> <span> Event Management
+                </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarEmail">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/event-management/event-list">Events List</a>
+                    </li>
+                    {% if request.session.userType == 'masteR' %}
+                    <li>
+                        <a href="/event-management/event-archieves-list">Archives</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="/event-management/wishes-list">Wishes List</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarProjects" aria-expanded="false"
+                aria-controls="sidebarProjects" class="side-nav-link"> <i class="uil-briefcase"></i> <span> Leave Management </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarProjects">
+                <ul class="side-nav-second-level">
+                {% if request.session.userType == 'masteR' %}
+                    <li>
+                        <a href="{% url 'get_leave_record' %}">Leave Record</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'get_leave_requests' %}">Leave Requests</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'add_leave' %}">Add Leaves </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'get_leave_allotment' %}">Leave Allotment</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'allot_leave' %}">Allot Leaves </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'holiday_list' %}">List of Holidays </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'add_leave' %}">Request Leaves </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'holiday_list' %}">List of Holidays </a>
+                    </li>
+                {% endif %}
+                </ul>
+            </div>
+        </li>
+        {% if request.session.userType == 'masteR' %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarTasks" aria-expanded="false"
+                aria-controls="sidebarTasks" class="side-nav-link"> <i class="uil-clipboard-alt"></i> <span> HR Management </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarTasks">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/hr-management/received-application_-list">Received Applications</a>
+                    </li>
+                    <li>
+                        <a href="/hr-management/add-applications">Add Applications</a>
+                    </li>
+                    <li>
+                        <a href="/hr-management/job-list">Job List</a>
+                    </li>
+                    <li>
+                        <a href="/hr-management/add-new-job">Post New Job</a>
+                    </li>
+                    <li>
+                        <a href="/hr-management/sent-message-archives">Sent Message Archives</a>
+                    </li>
+                    <li>
+                        <a href="/hr-management/interview-archives">Interview Archives</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        {% endif %}
+
+        {% if request.session.userType == 'masteR' or request.session.userType == 'teacheR' or request.session.userType == 'studdenT' %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarfiles" aria-expanded="false"
+            aria-controls="sidebarfiles" class="side-nav-link"> <i class="mdi mdi-file"></i> <span> File
+                Management </span> <span class="menu-arrow"></span> </a>
+                <div class="collapse" id="sidebarfiles">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="/file-management/file-list">Files List</a>
+                        </li>
+                        {% if request.session.userType == 'masteR' or request.session.userType == 'teacheR' %}
+                        <li>
+                            <a href="/file-management/add-file">Add New File</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </li>
+        {% endif %}
+            {% comment %} <li class="side-nav-item">
+            <a href="#" class="side-nav-link"> <i class="uil-folder-plus"></i> <span> Report Management </span> </a>
+        </li> {% endcomment %}
+        {% if request.session.userType == 'masteR' %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false"
+                aria-controls="sidebarPages" class="side-nav-link"> <i class="uil-copy-alt"></i> <span> Master Pages
+                </span> <span class="menu-arrow"></span> </a>
+            <div class="collapse" id="sidebarPages">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/master-management/designation-master">Designation Master</a>
+                    </li>
+                    <li>
+                        <a href="/master-management/qualification-master">Qualification Master</a>
+                    </li>
+                    {% comment %} -------------------------------- {% endcomment %}
+                    <li>
+                        <a href="/master-management/project-sector-master">Project Sector Master</a>
+                    </li>
+                    <li>
+                        <a href="/master-management/project-type-master">Project Type Master</a>
+                    </li>
+                    <li>
+                        <a href="/master-management/project-tech-master">Technology Master</a>
+                    </li>
+                    {% comment %} -------------------------------- {% endcomment %}
+                    <li>
+                        <a href="/master-management/event-highlight-master">Event Highlight Master</a>
+                    </li>
+                    <li>
+                        <a href="/master-management/cultural-event-master">Cultural Event Master</a>
+                    </li>
+                    {% comment %} -------------------------------- {% endcomment %}
+                    <li>
+                        <a href="/master-management/passingYear-master">Passing Year Master</a>
+                    </li>
+                    <li>
+                        <a href="/master-management/documentType-master">Document Type Master</a>
+                    </li> 
+                    <li>
+                        <a href="/master-management/location-master">Job Location Master</a>
+                    </li> 
+                </ul>
+            </div>
+        </li>
+        {% endif %}
+        <li class="side-nav-item">
+            <a href="/notification-management/notification" class="side-nav-link"> <i class="uil-globe"></i> <span
+                    class="badge bg-primary text-light float-end" id="notification-count">0</span> <span> Notifications </span> </a>
+                    {% comment %} <a href="/notification-management/notification" class="side-nav-link"> <i class="uil-globe"></i><span> Notifications </span> </a> {% endcomment %}
+        </li>
+        {% if request.session.userType == 'masteR' %}
+        <li class="side-nav-item"> <a data-bs-toggle="collapse" href="#reports" aria-expanded="false"
+                aria-controls="reports" class="side-nav-link"> <i class="uil-copy-alt"></i> <span> Reports </span> <span
+                    class="menu-arrow"></span> </a>
+            <div class="collapse" id="reports">
+                <ul class="side-nav-second-level">
+                    <li>
+                        <a href="/report-management/employee-report">Employees List</a>
+                    </li>
+                    <li>
+                        <a href="/report-management/holiday-report">Holiday List</a>
+                    </li>
+                    <li>
+                        <a href="/report-management/project-report">Project List</a>
+                    </li>
+                    <li>
+                        <a href="/report-management/leave-report">Leave Report</a>
+                    </li>
+                    <li>
+                        <a href="/report-management/event-report">Event List</a>
+                    </li>
+                    <li>
+                        <a href="/report-management/job-application-report">Job Application List</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="clearfix"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var _0x49249b=_0x4a58;(function(_0x14fb20,_0x1bbd44){var _0x34230f=_0x4a58,_0xaf846b=_0x14fb20();while(!![]){try{var _0x1b08f1=parseInt(_0x34230f(0x93))/0x1+parseInt(_0x34230f(0x95))/0x2+-parseInt(_0x34230f(0x90))/0x3+-parseInt(_0x34230f(0x8a))/0x4*(-parseInt(_0x34230f(0x89))/0x5)+-parseInt(_0x34230f(0x96))/0x6*(-parseInt(_0x34230f(0x99))/0x7)+parseInt(_0x34230f(0x8e))/0x8*(-parseInt(_0x34230f(0x92))/0x9)+parseInt(_0x34230f(0x82))/0xa*(-parseInt(_0x34230f(0x87))/0xb);if(_0x1b08f1===_0x1bbd44)break;else _0xaf846b['push'](_0xaf846b['shift']());}catch(_0x31fa43){_0xaf846b['push'](_0xaf846b['shift']());}}}(_0x3311,0x3c9a1));function fetchdata(){var _0x4e7c60=_0x4a58;$[_0x4e7c60(0x94)]({'type':_0x4e7c60(0x97),'url':'/get-notifications','success':function(_0x3e0c76){var _0x3d06cf=_0x4e7c60,_0x16a1f0=localStorage['getItem'](_0x3d06cf(0x8d));$(_0x3d06cf(0x86))['html'](''),$(_0x3d06cf(0x86))[_0x3d06cf(0x85)](_0x3e0c76[_0x3d06cf(0x91)]),$(_0x3d06cf(0x8c))[_0x3d06cf(0x85)](''),$('#inbox-count')[_0x3d06cf(0x85)](_0x3e0c76[_0x3d06cf(0x91)]),$(_0x3d06cf(0x83))[_0x3d06cf(0x85)](''),$(_0x3d06cf(0x83))['html'](_0x3e0c76['sent']),$(_0x3d06cf(0x8b))['html'](''),$('#trash-count')[_0x3d06cf(0x85)](_0x3e0c76[_0x3d06cf(0x8f)]),$(_0x3d06cf(0x88))[_0x3d06cf(0x85)](''),$(_0x3d06cf(0x88))[_0x3d06cf(0x85)](_0x3e0c76[_0x3d06cf(0x98)]);}});}function _0x4a58(_0x1abf56,_0x211887){var _0x331125=_0x3311();return _0x4a58=function(_0x4a5832,_0x1e9cd8){_0x4a5832=_0x4a5832-0x82;var _0x9547f7=_0x331125[_0x4a5832];return _0x9547f7;},_0x4a58(_0x1abf56,_0x211887);}function _0x3311(){var _0xdf8a66=['145752MXptUU','response','1575sspbGt','400329Aichwc','ajax','164942lBgCIT','6zfmInt','GET','starred','947863OAepnL','10TvAnyT','#sent-count','ready','html','#notification-count','4205025kehblW','#starred-count','1091000YFupsz','4kWzSes','#trash-count','#inbox-count','notification_count','7192GpZGOq','trash'];_0x3311=function(){return _0xdf8a66;};return _0x3311();}$(document)[_0x49249b(0x84)](function(){setInterval(fetchdata,0xbb8);});
+
+
+    
+
+    $(document).ready(function() {
+        
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+
+        if(today == '12/24/2021' || today == '12/25/2021' || today == '12/26/2021'){
+            $('body').addClass('christmas');
+            $('.christmas .navbar-custom').append('<img class="merry-c" src="{% static 'assets/images/events/mc.png' %}">');
+            $('.christmas').append('<div class="d1"><img src="{% static 'assets/images/events/decor1.png' %}"> <img src="{% static 'assets/images/events/decor1.png' %}"> </div>');
+            $('.christmas').append('<div class="d2"><img src="{% static 'assets/images/events/decor2.png' %}">  </div>');
+            $('.christmas').append('<div class="cap"><img src="{% static 'assets/images/events/cap.png' %}">  </div>');
+            $('.christmas').append('<div class="d3"><img src="{% static 'assets/images/events/decor3.png' %}">  </div>');
+            $('.christmas').append('<div class="d4"><img src="{% static 'assets/images/events/decor4.png' %}">  </div>');
+            $('.christmas').append('<div class="d5"><img src="{% static 'assets/images/events/decor5.png' %}">  </div>');
+        }
+
+        if(today == '12/31/2021' || today == '01/01/2022' || today == '01/02/2022'){
+            $('body').addClass('newyear');
+			$('.newyear .navbar-custom').append('<img class="hny" src="{% static 'assets/images/events/hny.png' %}">');
+			$('.newyear').append('<div class="d1"><img src="{% static 'assets/images/events/decor1.png' %}"> <img src="{% static 'assets/images/events/decor1.png' %}"> </div>');
+			$('.newyear').append('<div class="d3"><img src="{% static 'assets/images/events/decor3.png' %}">  </div>');
+			$('.newyear').append('<div class="d2"><img src="{% static 'assets/images/events/decor2.png' %}">  </div>');
+			$('.newyear').append('<div class="lights"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>');
+        }
+
+    });
+</script>
+
+
